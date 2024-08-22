@@ -3,16 +3,16 @@ tgt_dir := "target"
 
 # We list the sub-packages to be tested explicitly (instead of including all
 # files) so that we can skip source files that make be in `tgt_dir`.
-src_dirs := "cmd"
+src_dirs := "cmd pkg"
 
 # List available recipes.
 default:
     just --list
 
 # Start the default command.
-run:
+run addr="0.0.0.0:8080":
     make target/artfs/template
-    target/artfs/template
+    target/artfs/template '{{addr}}'
 
 # These checks are ordered in terms of estimated runtime, from quickest to
 # slowest, so that failures should be found as quickly as possible.
@@ -50,7 +50,9 @@ check_lint:
     revive \
         -config='{{build_conf_dir}}/revive.toml' \
         -formatter=plain \
-        cmd/...
+        cmd/... \
+        pkg/...
     golangci-lint run \
         --config='{{build_conf_dir}}/golangci.yaml' \
-        cmd/...
+        cmd/... \
+        pkg/...

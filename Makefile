@@ -4,7 +4,7 @@ pkg:=github.com/trustap/template
 
 # We list the sub-packages to be tested explicitly (instead of including all
 # files) so that we can skip source files that make be in `tgt_dir`.
-src_dirs:=cmd
+src_dirs:=cmd pkg
 
 deps:=$(shell find $(src_dirs) -name '*.go' -type f)
 

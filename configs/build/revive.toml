@@ -40,7 +40,6 @@ errorCode = 1
 [rule.get-return]
 [rule.identical-branches]
 [rule.if-return]
-[rule.import-shadowing]
 [rule.increment-decrement]
 [rule.indent-error-flow]
 [rule.modifies-parameter]
