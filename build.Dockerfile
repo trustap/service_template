@@ -32,6 +32,28 @@ RUN \
     && chmod 0777 /.docker
 
 RUN \
+    apt-get update \
+    && apt-get install --assume-yes \
+        python3 \
+        python3-pip
+
+RUN \
+    python3 -m pip install \
+        comment-style==0.1.1
+
+RUN \
+    go install github.com/mgechev/revive@v1.0.7 \
+    && go install golang.org/x/tools/cmd/goimports@v0.1.7 \
+    && go install mvdan.cc/gofumpt@v0.5.0 \
+    && curl \
+        --fail \
+        --silent \
+        --show-error \
+        --location \
+        https://raw.githubusercontent.com/golangci/golangci-lint/v1.55.2/install.sh \
+            | sh -s -- -b $(go env GOPATH)/bin v1.55.2
+
+RUN \
     curl \
         --fail \
         --silent \

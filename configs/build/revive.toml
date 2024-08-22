@@ -1,0 +1,65 @@
+ignoreGeneratedHeader = false
+severity = "error"
+confidence = 0.8
+errorCode = 1
+
+# The following rules are not enabled:
+#
+# * `exported`: The rules for commenting exported symbols is only necessary for
+#   public-facing projects.
+# * `file-header`: The rules for file header comments is only necessary for
+#   public-facing projects.
+# * `max-public-structs`: We don't impose a limit on the number of `struct`s in
+#   a file.
+
+[rule.atomic]
+[rule.bare-return]
+[rule.blank-imports]
+[rule.bool-literal-in-expr]
+[rule.call-to-gc]
+[rule.confusing-naming]
+[rule.confusing-results]
+[rule.constant-logical-expr]
+[rule.context-as-argument]
+[rule.context-keys-type]
+[rule.deep-exit]
+[rule.defer]
+[rule.dot-imports]
+[rule.duplicated-imports]
+[rule.empty-block]
+[rule.empty-lines]
+[rule.error-strings]
+[rule.errorf]
+[rule.function-result-limit]
+    # TODO This value was updated from 3, which may be considered a sensible
+    # default. However, this default has been raised to allow the use of the
+    # `Decompose` pattern that is used in the project. However, this approach
+    # may not be scalable, and it may be worth considering alternative
+    # approaches in future.
+    arguments=[4]
+[rule.get-return]
+[rule.identical-branches]
+[rule.if-return]
+[rule.import-shadowing]
+[rule.increment-decrement]
+[rule.indent-error-flow]
+[rule.modifies-parameter]
+[rule.modifies-value-receiver]
+[rule.range-val-address]
+[rule.range-val-in-closure]
+[rule.range]
+[rule.redefines-builtin-id]
+[rule.string-format]
+[rule.string-of-int]
+[rule.struct-tag]
+[rule.superfluous-else]
+[rule.time-naming]
+[rule.unconditional-recursion]
+[rule.unexported-naming]
+[rule.unexported-return]
+[rule.unnecessary-stmt]
+[rule.unreachable-code]
+[rule.unused-parameter]
+[rule.var-declaration]
+[rule.var-naming]
+[rule.waitgroup-by-value]

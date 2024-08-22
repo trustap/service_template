@@ -1,3 +1,4 @@
+build_conf_dir := "configs/build"
 tgt_dir := "target"
 
 # We list the sub-packages to be tested explicitly (instead of including all
@@ -12,3 +13,44 @@ default:
 run:
     make target/artfs/template
     target/artfs/template
+
+# These checks are ordered in terms of estimated runtime, from quickest to
+# slowest, so that failures should be found as quickly as possible.
+#
+# Run all tests.
+check: check_style check_lint
+
+# Run style checks.
+check_style: check_go_style
+
+# Run style checks for Go files.
+check_go_style:
+    @# `gofmt` returns 0 even if formatting issues were found. However, it only
+    @# produces output if issues were found so we fail the check if any output
+    @# was produced.
+    @#
+    @# We check the formatting with `gofmt` after `gofumpt` and `goimports` to
+    @# avoid drift between the different formatters; `gofmt` is the canonical
+    @# representation.
+    ! (gofumpt -d {{src_dirs}} | grep '')
+    ! (goimports -d {{src_dirs}} | grep '')
+    ! (gofmt -s -d {{src_dirs}} | grep '')
+    comment_style '{{build_conf_dir}}/comment_style.yaml'
+
+# Check for semantic issues in Go files.
+check_lint:
+    @# `revive` is supported by `golangci-lint`, but we run `revive` directly
+    @# here because it's unclear how to disable specific `revive` rules via the
+    @# `golangci-lint` configuration.
+    @#
+    @# TODO There is an overlap between some linters that `golangci-lint`
+    @# provides and `revive`. `revive` should be used to replace these where
+    @# possible, for consistency, and because `revive` generally runs faster
+    @# than `golangci-lint`.
+    revive \
+        -config='{{build_conf_dir}}/revive.toml' \
+        -formatter=plain \
+        cmd/...
+    golangci-lint run \
+        --config='{{build_conf_dir}}/golangci.yaml' \
+        cmd/...
