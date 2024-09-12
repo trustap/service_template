@@ -18,7 +18,8 @@ run addr='0.0.0.0:8080':
 # slowest, so that failures should be found as quickly as possible.
 #
 # Run all tests.
-check: check_style check_lint
+check: && check_style check_lint
+    make target/artfs/service_template
 
 # Run style checks.
 check_style: check_go_style
@@ -56,3 +57,7 @@ check_lint:
         --config='{{build_conf_dir}}/golangci.yaml' \
         cmd/... \
         pkg/...
+
+# Format source files.
+fmt:
+    gofumpt -w .

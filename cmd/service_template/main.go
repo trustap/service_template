@@ -69,7 +69,7 @@ func run(
 	server := &http.Server{Addr: listenAddr, Handler: mux}
 
 	setupLogger.Printf("listening on '%s'", listenAddr)
-	err := service_template_http.ListenAndServe(server, 3 * time.Second)
+	err := service_template_http.ListenAndServe(server, 3*time.Second)
 	if err != nil {
 		return fmt.Errorf("listening failed: %w", err)
 	}
