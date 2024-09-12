@@ -69,7 +69,7 @@ while true ; do
 done
 
 org_name='trustap'
-proj_name='template'
+proj_name='service_template'
 img_name="$org_name/$proj_name.build"
 
 bash scripts/docker_rbuild.sh \

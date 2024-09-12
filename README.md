@@ -55,7 +55,8 @@ in enterprise settings:
 * Nested Docker: The default `build.Dockerfile` installs Docker, and the default
   build environment (using `scripts/with_build_env.sh`) mounts the local Docker
   socket into the container to allow Docker to be run from inside the build
-  environment.
+  environment. See <https://seankelleher.ie/posts/with_build_env/> for more
+  information on this approach.
 * Private shared repositories: Local SSH keys and "known hosts" files can be
   mounted into the default build environment to allow access to private
   repositories hosted on public repository hosting services like GitHub.

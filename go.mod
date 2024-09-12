@@ -2,7 +2,7 @@
 // Use of this source code is governed by an MIT
 // licence that can be found in the LICENCE file.
 
-module github.com/trustap/template
+module github.com/trustap/service_template
 
 go 1.22
 

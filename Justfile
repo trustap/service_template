@@ -10,9 +10,9 @@ default:
     just --list
 
 # Start the default command.
-run addr="0.0.0.0:8080":
-    make target/artfs/template
-    target/artfs/template '{{addr}}'
+run addr='0.0.0.0:8080':
+    make target/artfs/service_template
+    target/artfs/service_template '{{addr}}'
 
 # These checks are ordered in terms of estimated runtime, from quickest to
 # slowest, so that failures should be found as quickly as possible.
