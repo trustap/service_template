@@ -25,8 +25,9 @@ project can be built locally by running `make`.
 
 ### Running
 
-The default executable for the project can be built and run from the build
-environment using `just run`.
+Copy `configs/api.sample.yaml` to `configs/api.yaml` and populate the new
+configuration file. Then the default executable for the project can be built and
+run from the build environment using `just run`.
 
 #### Outputs
 

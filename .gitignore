@@ -1,2 +1,5 @@
 # Build directory.
 target
+
+# Configuration files.
+configs/api.yaml
