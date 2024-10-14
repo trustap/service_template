@@ -1,5 +1,8 @@
+project := "service_template"
 build_conf_dir := "configs/build"
 tgt_dir := "target"
+tgt_artfs_dir := "{{tgt_artfs_dir}}/artfs"
+tgt := "{{tgt_artfs_dir}}/{{project}}"
 
 # We list the sub-packages to be tested explicitly (instead of including all
 # files) so that we can skip source files that make be in `tgt_dir`.
@@ -11,15 +14,15 @@ default:
 
 # Start the default command.
 run addr='0.0.0.0:8080':
-    make target/artfs/service_template
-    target/artfs/service_template '{{addr}}'
+    make '{{tgt}}'
+    '{{tgt}}' '{{addr}}'
 
 # These checks are ordered in terms of estimated runtime, from quickest to
 # slowest, so that failures should be found as quickly as possible.
 #
 # Run all tests.
 check: && check_style check_lint
-    make target/artfs/service_template
+    make '{{tgt}}'
 
 # Run style checks.
 check_style: check_go_style
