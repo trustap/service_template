@@ -1,5 +1,6 @@
 tgt_dir:=target
 tgt_artfs_dir:=$(tgt_dir)/artfs
+tgt_tmp_dir:=$(tgt_dir)/tmp
 pkg:=github.com/trustap/service_template
 
 # We list the sub-packages to be tested explicitly (instead of including all
@@ -27,6 +28,12 @@ $(tgt_artfs_dir)/%: $(deps) | $(tgt_artfs_dir)
 	)
 
 $(tgt_artfs_dir): | $(tgt_dir)
+	mkdir '$@'
+
+$(tgt_tmp_dir): | $(tgt_dir)
+	mkdir '$@'
+
+$(tgt_tmp_dir)/img_ctx: | $(tgt_tmp_dir)
 	mkdir '$@'
 
 $(tgt_dir):

@@ -48,6 +48,13 @@ Multiple directories are generated to the `target` directory.
   written. These will generally be deleted and rebuilt each time the associated
   build process runs, so they can be deleted without problems.
 
+### Run in container
+
+Create an environment variable file, `configs/env`, containing values for all of
+the environment variables defined in `configs/api.yaml`. Then the default
+container for the project can be created and run from the build environment
+using `just run_cont`.
+
 ### Capabilities
 
 By default this project is set up with a few capabilities to allow it to be used
@@ -62,7 +69,7 @@ in enterprise settings:
   mounted into the default build environment to allow access to private
   repositories hosted on public repository hosting services like GitHub.
 
-### Project Layout
+### Project layout
 
 This project is mainly laid out according to
 <https://github.com/golang-standards/project-layout>, and conforms to the

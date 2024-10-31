@@ -1,21 +1,37 @@
-project := "service_template"
-build_conf_dir := "configs/build"
-tgt_dir := "target"
-tgt_artfs_dir := "{{tgt_artfs_dir}}/artfs"
-tgt := "{{tgt_artfs_dir}}/{{project}}"
+project := 'service_template'
+img := 'trustap' / project
+build_conf_dir := 'configs/build'
+tgt_dir := 'target'
+tgt_artfs_dir := tgt_dir / 'artfs'
+tgt := tgt_artfs_dir / project
+tgt_tmp_dir := tgt_dir / 'tmp'
+tgt_img_ctx_dir := tgt_tmp_dir / 'img_ctx'
 
 # We list the sub-packages to be tested explicitly (instead of including all
 # files) so that we can skip source files that make be in `tgt_dir`.
-src_dirs := "cmd pkg"
+src_dirs := 'cmd pkg'
 
 # List available recipes.
 default:
     just --list
 
 # Start the default command.
-run addr='0.0.0.0:8080':
+run conf='configs/api.yaml' addr='0.0.0.0:8080':
     make '{{tgt}}'
-    '{{tgt}}' '{{addr}}'
+    '{{tgt}}' \
+        '{{conf}}' \
+        '{{addr}}'
+
+# Start the default container.
+run_cont addr='0.0.0.0:8080': build_img
+    test -f 'configs/env'
+    docker run \
+        --rm \
+        --interactive \
+        --tty \
+        --publish '{{addr}}:80' \
+        --env-file='configs/env' \
+        '{{img}}:latest'
 
 # These checks are ordered in terms of estimated runtime, from quickest to
 # slowest, so that failures should be found as quickly as possible.
@@ -64,3 +80,22 @@ check_lint:
 # Format source files.
 fmt:
     gofumpt -w .
+
+# Build the 'run' image for this project.
+build_img version='latest':
+    make target/artfs/service_template
+    rm -rf '{{tgt_img_ctx_dir}}'
+    make \
+        '{{tgt}}' \
+        '{{tgt_img_ctx_dir}}'
+    cp \
+        configs/api.sample.yaml \
+        scripts/check_env_config.sh \
+        scripts/docker_entrypoint.sh \
+        '{{tgt_artfs_dir}}'/service_template \
+        '{{tgt_img_ctx_dir}}'
+    bash scripts/docker_rbuild.sh \
+        '{{img}}' \
+        '{{version}}' \
+        --file='Dockerfile' \
+        '{{tgt_img_ctx_dir}}'

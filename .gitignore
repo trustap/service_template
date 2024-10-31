@@ -3,3 +3,4 @@ target
 
 # Configuration files.
 configs/api.yaml
+configs/env
