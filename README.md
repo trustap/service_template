@@ -9,6 +9,18 @@ This project defines a template for backend projects at Trustap.
 Development
 -----------
 
+### Build environment
+
+The build environment for this project is defined in `build.Dockerfile`. These
+steps can be used to replicate the build environment locally. Alternatively, to
+make use of the Dockerised build environment, the following can be used:
+
+    bash scripts/with_build_env.sh --dev bash
+
+This command will start a new Bash session within the build environment, with
+the local project directory and local user mounted inside the build environment,
+which can be used for local development.
+
 ### Building
 
 #### With Docker
