@@ -1,4 +1,4 @@
-# Copyright 2024 Trustap. All rights reserved.
+# Copyright 2024-2025 Trustap. All rights reserved.
 # Use of this source code is governed by an MIT
 # licence that can be found in the LICENCE file.
 
@@ -102,7 +102,7 @@ docker run \
 # See `scripts/docker_hostpath.sh` for details on `DOCKER_MOUNT_SRC` and
 # `DOCKER_MOUNT_TGT`.
 DOCKER_MOUNT_SRC="$(bash scripts/docker_hostpath.sh $(pwd))"
-DOCKER_MOUNT_TGT=/go/src/github.com/trustap/rest_api
+DOCKER_MOUNT_TGT=/go/src/github.com/trustap/"$proj_name"
 
 # The group ID for the `docker` group on the host can be different from
 # the `docker` group created inside the image when installing `docker`.
