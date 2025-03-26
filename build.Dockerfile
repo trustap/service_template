@@ -1,8 +1,10 @@
-# Copyright 2024 Trustap. All rights reserved.
+# Copyright 2024-2025 Trustap. All rights reserved.
 # Use of this source code is governed by an MIT
 # licence that can be found in the LICENCE file.
 
 FROM golang:1.22.5-bullseye
+
+SHELL ["/bin/bash", "-o", "errexit", "-o", "pipefail", "-c"]
 
 ENV GOPRIVATE=github.com/trustap/*
 
