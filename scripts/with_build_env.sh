@@ -2,8 +2,7 @@
 # Use of this source code is governed by an MIT
 # licence that can be found in the LICENCE file.
 
-# `$0 [--dev] [--fwd-ssh-agent] [--known-hosts <known-hosts-file>] [--uid <uid>]
-# [--gid <gid>]` runs a command in the build environment.
+# `$0 [--dev] [--fwd-ssh-agent] [--known-hosts <known-hosts-file>] [--uid <uid>] [--gid <gid>] [--docker-network <network>] [--docker-flag <flag>]` runs a command in the build environment.
 #
 # The `dev` argument runs the build environment in interactive mode with a new
 # TTY and using the host network.
@@ -17,6 +16,12 @@
 #
 # The `uid` and `gid` arguments run the command using the given user ID and
 # group ID.
+#
+# The `docker-network` argument sets the container network to the provided
+# `network`.
+#
+# The `docker-flag` argument passes the specified `flag` directly to `docker`
+# when running the environment.
 
 set -o errexit
 
